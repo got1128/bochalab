@@ -12,13 +12,11 @@ sources:
     url: "https://developer.mozilla.org/en-US/docs/Glossary/DNS"
   - title: "Root Servers（IANA）"
     url: "https://www.iana.org/domains/root/servers"
+  - title: "Root Server Technical Operations（root-servers.org）"
+    url: "https://root-servers.org/"
   - title: "RFC 1034: Domain Names - Concepts and Facilities"
     url: "https://www.rfc-editor.org/rfc/rfc1034"
 ---
-
-<Callout type="warning" title="給創作者：這是排版測試用的範例草稿">
-這篇是 Claude 寫的範例，用來測試文章頁的排版（標題、清單、表格、引用、程式碼、提示框）。標示「待查證」的地方請再確認。正式發布前請換成你自己的定稿，或確認內容後把 `draft` 改成 `false`。
-</Callout>
 
 Wheek！鼠鼠今天調查了一件每天都在發生、卻很少人注意的事：**我們在瀏覽器輸入網址之後，電腦到底怎麼找到那個網站？**
 
@@ -44,7 +42,7 @@ Wheek！鼠鼠今天調查了一件每天都在發生、卻很少人注意的事
 拿到 IP 之後，瀏覽器才會真正開始連線、下載網頁。
 
 <Callout>
-根網域名稱伺服器在名稱上共有 13 組（從 `a.root-servers.net` 到 `m.root-servers.net`），但實際上每一組背後都有分散在世界各地的許多台機器。實際的機器數量會變動，請以 IANA 的最新資料為準（待查證）。
+根網域名稱伺服器在名稱上共有 13 組（從 `a.root-servers.net` 到 `m.root-servers.net`），由 12 個不同的組織負責營運（Verisign 一家就管了 a 和 j 兩組）。不過每一組背後都不只一台機器：根據 root-servers.org 的統計，2026 年 11 月 27 日當天，全世界共有 2,046 個根伺服器節點在運作，這個數字會隨時間變動。
 </Callout>
 
 ### 為什麼通常感覺不到等待？
@@ -90,4 +88,4 @@ dig bochalab.com +short
 - 快取和 TTL 讓查詢大多數時候快到感覺不到
 - 架網站時最常設定的是 A、CNAME、MX、TXT 紀錄
 
-下一篇，鼠鼠想調查網址前面那個小鎖頭：HTTPS 到底是什麼？更多網站製作的知識，可以到[鼠鼠數位研究所](/journal/digital/)看看。
+下一篇，鼠鼠想調查網址前面那個小鎖頭：HTTPS 到底是什麼？{/* 【發布後加連結】HTTPS 那篇發布後，可以改成 [HTTPS 到底是什麼？](/journal/digital/https-what-is-it/) */}更多網站製作的知識，可以到[鼠鼠數位研究所](/journal/digital/)看看。

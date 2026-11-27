@@ -1,0 +1,103 @@
+---
+title: "Sitemap 是什麼？網站地圖怎麼幫 Google 找到你的文章"
+description: "Sitemap 是寫給搜尋引擎看的網站地圖。鼠鼠拿自己網站的 sitemap.xml 當例子，說明它長什麼樣子、哪些網站需要、怎麼提交給 Google，以及常見的誤會。"
+category: "digital"
+date: "2026-12-19"
+tags: ["網站", "SEO", "Sitemap", "Google Search Console"]
+draft: true
+sources:
+  - title: "What Is a Sitemap（Google Search Central）"
+    url: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview"
+  - title: "Build and submit a sitemap（Google Search Central）"
+    url: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap"
+---
+
+Wheek！鼠鼠的網站上線之後，遇到一個新問題：**Google 要怎麼知道我們有哪些文章？**
+
+搜尋引擎會派出「爬蟲」，沿著網頁之間的連結一頁一頁逛。但如果網站很新、還沒有什麼人連過來，爬蟲可能要過一陣子才會發現你。這時候，就輪到 **Sitemap** 出場了。
+
+## Sitemap 是什麼？
+
+Google 的說明是：Sitemap 是一個檔案，網站在裡面提供網頁、影片和其他檔案的資訊。搜尋引擎會讀這個檔案，**更有效率地爬取你的網站**。
+
+如果把網站想成一棟圖書館，Sitemap 就像入口處的館藏目錄。爬蟲不用一層一層亂逛，看目錄就知道有哪些書、放在哪裡。
+
+## Sitemap 長什麼樣子？
+
+最常見的是 XML 格式。鼠鼠特派員網站的 Sitemap 就放在 `https://bochalab.com/sitemap.xml`，其中一段（簡化過）長這樣：
+
+```xml
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://bochalab.com/journal/adulting/water-leak-downstairs/</loc>
+    <lastmod>2026-11-27</lastmod>
+  </url>
+</urlset>
+```
+
+- `<loc>`：網頁的完整網址
+- `<lastmod>`：這一頁最後一次**重要更新**的日期
+
+Google 建議 `<loc>` 用完整的網址，不要只寫 `/journal/`；也建議只列出網頁的正式網址（canonical URL），不要列重複的版本。
+
+<Callout title="茶茶小補充">
+除了 XML，Google 也接受 RSS、Atom，甚至是一行一個網址的純文字檔，Google 說它對格式沒有特別偏好。
+</Callout>
+
+## 哪些網站需要 Sitemap？
+
+依照 Google 的說明，**比較需要** Sitemap 的網站有：
+
+- **大型網站**：頁面很多，爬蟲比較容易漏掉
+- **新網站**：外面還沒有什麼連結指向它
+- **有很多影片、圖片或新聞內容的網站**
+
+反過來說，如果網站**很小**（Google 的定義是大約 500 頁以下），而且頁面之間都有連結串好，可能不太需要 Sitemap。
+
+<Callout type="discovery" title="那鼠鼠的網站呢？">
+鼠鼠的網站很小，但也是剛上線的新網站，外面還沒有什麼連結。而且我們用的 Next.js 可以在每次更新網站時**自動產生** Sitemap，完全不用手動維護，所以就放上去了。很多 WordPress、Wix 這類架站工具，也會自動幫你產生。
+</Callout>
+
+## 怎麼把 Sitemap 交給 Google？
+
+Google 列出幾種方式：
+
+1. **Google Search Console**：在「Sitemap」報表裡提交網址，之後還可以看到 Google 什麼時候讀過、有沒有出錯。這是最推薦的方式
+2. **寫在 robots.txt 裡**：加上一行 `Sitemap: 網址`，爬蟲來的時候就會看到
+3. **Search Console API**：適合要用程式自動提交的人
+
+鼠鼠的 `robots.txt` 裡就有這一行：
+
+```text
+Sitemap: https://bochalab.com/sitemap.xml
+```
+
+## 常見的三個誤會
+
+### 誤會 1：提交 Sitemap，Google 就一定會收錄
+
+不會。Google 說得很清楚，提交 Sitemap **只是一個提示**，不保證 Google 一定會下載它，也不保證裡面的網頁都會被爬取和收錄。
+
+### 誤會 2：把 priority 設高一點，排名就會比較好
+
+Sitemap 裡可以寫 `<priority>`（優先程度）和 `<changefreq>`（更新頻率），但 **Google 會忽略這兩個值**。
+
+### 誤會 3：lastmod 天天更新，Google 就會常常來
+
+Google 只有在 `<lastmod>` **一直都準確**的時候才會使用它。而且它應該反映「重要的更新」，例如改了主要內容；只改了頁尾的版權年份，不算重要更新。亂改日期反而會讓 Google 不相信這個欄位。
+
+## Sitemap 的大小限制
+
+一個 Sitemap 最多 **50,000 個網址**，或是未壓縮 **50MB**。超過的話要拆成好幾個檔案，再用一個「Sitemap 索引檔」把它們串起來。一般的個人網站通常離這個上限很遠。
+
+---
+
+## 鼠鼠的調查小結
+
+- Sitemap 是寫給搜尋引擎看的網站目錄，幫助爬蟲更有效率地找到網頁
+- 新網站、大網站、影音內容多的網站特別需要
+- 透過 Google Search Console 提交，也可以寫進 robots.txt
+- 提交不保證收錄；Google 會忽略 priority 和 changefreq
+- lastmod 要寫真正的重要更新日期
+
+想了解網站的其他基礎知識，歡迎到[鼠鼠數位研究所](/journal/digital/)逛逛。

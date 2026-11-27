@@ -1,0 +1,83 @@
+---
+title: "HTTPS 是什麼？網址前面的小鎖頭，跟 HTTP 差在哪裡"
+description: "HTTP 像明信片，HTTPS 像封好的信。鼠鼠用寄信的比喻，帶你看懂 HTTPS 怎麼保護你和網站之間的資料，以及架網站時怎麼免費開啟 HTTPS。"
+category: "digital"
+date: "2026-12-12"
+tags: ["網站", "HTTPS", "網路安全", "網路基礎"]
+draft: true
+sources:
+  - title: "HTTPS - MDN Web Docs Glossary"
+    url: "https://developer.mozilla.org/en-US/docs/Glossary/HTTPS"
+  - title: "How It Works - Let's Encrypt"
+    url: "https://letsencrypt.org/how-it-works/"
+  - title: "Securing your GitHub Pages site with HTTPS（GitHub Docs）"
+    url: "https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https"
+  - title: "HTTPS as a ranking signal（Google Search Central Blog，2014）"
+    url: "https://developers.google.com/search/blog/2014/08/https-as-ranking-signal"
+---
+
+Wheek！上一次鼠鼠調查了 DNS，知道網址是怎麼找到網站的。這次要調查的，是網址最前面那幾個字：**`https://`**，還有網址列旁邊常常出現的小鎖頭。
+
+## 先看 HTTP：網頁是怎麼送過來的
+
+你打開一個網頁時，瀏覽器會向網站的伺服器「要」那一頁，伺服器再把網頁「送」回來。這一來一往要遵守的規則，就叫做 **HTTP**（HyperText Transfer Protocol，超文本傳輸協定）。
+
+問題是，傳統的 HTTP 沒有加密。資料從伺服器到你的電腦，中間會經過很多網路設備，任何一站都有機會看到內容。
+
+## HTTPS：同一封信，改用封好的信封寄
+
+**HTTPS** 的 S 是 Secure（安全）。MDN 的說明是：HTTPS 是 HTTP 的加密版本，它使用 **TLS** 來加密用戶端和伺服器之間的所有通訊。
+
+茶茶是特派員裡負責送信的，所以她用寄信來比喻：
+
+| | HTTP | HTTPS |
+|---|---|---|
+| 像什麼 | 寄明信片 | 寄一封封好的信 |
+| 路上的人看得到內容嗎？ | 看得到 | 只看得到信封，看不到內容 |
+| 適合傳什麼 | 公開、不怕被看的東西 | 帳號密碼、個人資料、付款資訊 |
+
+MDN 也提到，這種安全的連線讓我們可以放心地和伺服器交換敏感資料，例如使用網路銀行或線上購物的時候。
+
+<Callout title="茶茶小補充">
+你可能也聽過 **SSL** 這個名字，例如「SSL 憑證」。SSL 和 TLS 都是加密連線用的技術，現在網站用的是 TLS，但很多地方還是習慣說 SSL。
+</Callout>
+
+{/* 【待查證】SSL／TLS 的關係：本文引用的 MDN HTTPS 頁面沒有直接寫到，建議補一個說明 TLS 取代 SSL 的來源 */}
+
+## 小鎖頭代表什麼？不代表什麼？
+
+網址列出現小鎖頭（或類似的圖示），代表**你和這個網站之間的連線有加密**。
+
+但要特別注意：**加密不等於這個網站可以信任**。詐騙網站一樣可以申請憑證、一樣有 HTTPS。小鎖頭保護的是「信在路上不被偷看」，不保證「收信的人是好人」。所以輸入密碼或信用卡之前，還是要確認網址是不是你要去的那個網站。
+
+## 憑證：證明「這個網站真的是它說的那個網站」
+
+要開啟 HTTPS，網站需要一張**憑證**（certificate）。憑證由**憑證機構**（Certificate Authority，簡稱 CA）發給網站，瀏覽器信任這些機構，所以也就能信任它們發出的憑證。
+
+以前憑證通常要花錢買，也要手動設定。現在很多網站使用 **Let's Encrypt**：根據它的官方說明，Let's Encrypt 是一個免費、自動化、開放的憑證機構，由非營利組織 ISRG 營運，目標是讓網站可以**自動**取得瀏覽器信任的憑證，不需要人工處理。
+
+<Callout type="discovery" title="鼠鼠的網站就是這樣做的">
+鼠鼠特派員的網站放在 GitHub Pages。GitHub 的文件說明，所有 GitHub Pages 網站（包括使用自訂網域的網站）都支援 HTTPS，GitHub 會自動向 Let's Encrypt 申請憑證。我們只要在設定裡勾選 **Enforce HTTPS**，所有用 HTTP 連進來的人，就會被自動轉到 HTTPS。
+</Callout>
+
+## 為什麼網站都應該用 HTTPS？
+
+- **保護讀者**：就算只是看文章，讀者也不希望別人知道自己在看什麼，或被中途竄改內容
+- **瀏覽器會提醒**：沒有 HTTPS 的網站，瀏覽器可能會顯示「不安全」之類的提示，讓讀者不放心{/* 【待查證】可補 Chrome 或其他瀏覽器官方說明作為來源 */}
+- **搜尋引擎也在意**：Google 在 2014 年宣布開始把 HTTPS 當作排名的訊號之一。Google 當時也說明，這只是一個很輕微的訊號，影響不到 1% 的搜尋，比起高品質的內容，權重小得多
+
+<Callout type="warning" title="波波的提醒">
+有 HTTPS 不代表排名就會變好。對搜尋來說，**好的內容還是最重要的**，HTTPS 比較像是「基本禮貌」。
+</Callout>
+
+---
+
+## 鼠鼠的調查小結
+
+- HTTP 是瀏覽器和伺服器溝通的規則，HTTPS 是它的加密版本，用 TLS 加密
+- HTTP 像明信片，HTTPS 像封好的信
+- 小鎖頭代表連線有加密，**不代表網站一定可信**
+- 網站需要憑證才能開啟 HTTPS，Let's Encrypt 提供免費、自動的憑證
+- 用 GitHub Pages 架站，記得勾選 Enforce HTTPS
+
+想知道網址怎麼找到網站，可以先讀上一篇的 DNS 調查。{/* 【發布後加連結】DNS 那篇發布後，可以改成 [DNS 是什麼？](/journal/digital/dns-what-is-it/) */}更多網站製作的知識，都在[鼠鼠數位研究所](/journal/digital/)。
