@@ -1,16 +1,62 @@
 @import "tailwindcss";
 
-/* 波茶本色（CLAUDE.md §5.2）。元件裡請用這些語意化名稱，不要直接寫 HEX。 */
+/*
+ * 設計系統（CLAUDE.md §5）
+ * 元件裡請用這些語意化名稱（bg-paper、text-ink、text-brand…），不要直接寫 HEX。
+ */
 @theme {
-  --color-paper: #f5efe3;
-  --color-ink: #2b2522;
-  --color-ink-muted: #68625c;
-  --color-brand: #1f5560;
-  --color-caramel: #a8612a;
-  --color-blush: #d98c8a;
+  /* 波茶本色 */
+  --color-paper: #f5efe3; /* 奶茶米：頁面背景 */
+  --color-paper-deep: #ece3d2; /* 卡片、區塊底色（比背景深一點） */
+  --color-ink: #2b2522; /* 波波墨黑：內文、標題 */
+  --color-ink-muted: #68625c; /* 次要文字：日期、說明 */
+  --color-brand: #1f5560; /* 研究所深青：連結、按鈕 */
+  --color-caramel: #a8612a; /* 臉頰焦糖：只能用在大字（≥24px，或粗體 ≥18.66px） */
+  --color-blush: #d98c8a; /* 鼻頭粉：只能當裝飾，不能當文字 */
+
+  /* 字體：中文一律接在英文字體後面當備援 */
+  --font-sans: var(--font-noto-sans-tc), system-ui, sans-serif;
+  --font-serif: var(--font-libre-baskerville), var(--font-noto-sans-tc), serif;
+  --font-script: var(--font-dancing-script), cursive;
+  --font-mono: var(--font-roboto-mono), ui-monospace, monospace;
 }
 
-body {
-  background: var(--color-paper);
-  color: var(--color-ink);
+@layer base {
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* 版面容器：內容最寬 1080px，左右留白 */
+  .container-page {
+    width: 100%;
+    max-width: 1080px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* 復古刊物的雙線分隔 */
+  .rule-double {
+    border-bottom: 3px double var(--color-ink);
+  }
 }
