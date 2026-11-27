@@ -22,11 +22,12 @@ export function PostCard({ post, showCategory = true, headingLevel = "h2" }: Pro
             alt=""
             width={240}
             height={160}
+            sizes="160px"
             className="h-28 w-40 rounded-lg border border-ink/10 object-cover"
           />
         ) : (
           <div className="flex h-28 w-40 items-center justify-center rounded-lg bg-paper-deep">
-            <Image src={categoryIcon(post.category)} alt="" width={320} height={320} className="h-24 w-24" />
+            <Image src={categoryIcon(post.category)} alt="" width={320} height={320} sizes="96px" className="h-24 w-24" />
           </div>
         )}
       </div>

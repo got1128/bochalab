@@ -34,7 +34,7 @@ export default async function CategoryPage({ params }: PageProps<"/journal/[cate
   return (
     <div className="container-page py-12 md:py-16">
       <header className="rule-double flex items-center gap-5 pb-6">
-        <Image src={categoryIcon(c.slug)} alt="" width={320} height={320} className="h-20 w-20 shrink-0 md:h-28 md:w-28" />
+        <Image src={categoryIcon(c.slug)} alt="" width={320} height={320} sizes="112px" className="h-20 w-20 shrink-0 md:h-28 md:w-28" />
         <div>
           <p className="font-serif text-sm tracking-[0.2em] text-ink-muted">{c.nameEn.toUpperCase()}</p>
           <h1 className="mt-1 text-3xl font-bold tracking-wide md:text-4xl">{c.name}</h1>

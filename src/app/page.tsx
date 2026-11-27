@@ -113,7 +113,7 @@ function Columns() {
               href={`/journal/${c.slug}/`}
               className="group flex h-full flex-col items-center rounded-xl border border-ink/10 bg-paper-deep/50 p-5 text-center transition-colors hover:border-brand hover:bg-paper-deep"
             >
-              <Image src={categoryIcon(c.slug)} alt="" width={320} height={320} className="h-auto w-28 md:w-36" />
+              <Image src={categoryIcon(c.slug)} alt="" width={320} height={320} sizes="144px" className="h-auto w-28 md:w-36" />
               <span className="mt-3 font-serif text-xs tracking-widest text-ink-muted">{c.nameEn}</span>
               <span className="mt-1 font-bold text-ink group-hover:text-brand md:text-lg">{c.name}</span>
               <span className="mt-1 text-sm text-ink-muted">{c.description}</span>
@@ -144,6 +144,7 @@ function Bookshelf() {
           alt="波波戴著報童帽，坐著專心看一本藍色封面的書"
           width={640}
           height={658}
+          sizes="(min-width: 768px) 220px, 176px"
           className="mx-auto h-auto w-44 md:w-full"
         />
         {shelf.length ? (

@@ -101,7 +101,7 @@ export default function AboutPage() {
         <ul className="mt-8 grid gap-6 md:grid-cols-2">
           {reporters.map((r) => (
             <li key={r.name} className="flex gap-5 rounded-2xl border border-ink/10 bg-paper-deep/50 p-6">
-              <Image src={r.avatar} alt={r.avatarAlt} width={320} height={320} className="h-24 w-24 shrink-0 md:h-28 md:w-28" />
+              <Image src={r.avatar} alt={r.avatarAlt} width={320} height={320} sizes="112px" className="h-24 w-24 shrink-0 md:h-28 md:w-28" />
               <div>
                 <h3 className="text-xl font-bold">
                   {r.name}

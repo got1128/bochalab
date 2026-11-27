@@ -111,6 +111,7 @@ export default async function PostPage({ params }: PageProps<"/journal/[category
           width={1200}
           height={800}
           priority
+          sizes="(min-width: 768px) 680px, 100vw"
           className="mt-8 aspect-[3/2] w-full rounded-xl border border-ink/10 object-cover"
         />
       )}

@@ -42,3 +42,6 @@ next-env.d.ts
 
 # 原始插畫（只留在本機，網站用的 WebP 在 public/images/）
 /image/
+
+# build 前自動產生的多尺寸圖片
+/public/resized/

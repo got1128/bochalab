@@ -25,16 +25,18 @@ export const libreBaskerville = Libre_Baskerville({
   variable: "--font-libre-baskerville",
 });
 
-// 英文裝飾（少量使用）
+// 英文裝飾（少量使用）：不是首屏的關鍵文字，不預先載入，避免跟主圖搶頻寬
 export const dancingScript = Dancing_Script({
   subsets: ["latin"],
+  preload: false,
   display: "swap",
   variable: "--font-dancing-script",
 });
 
-// 數字、程式碼
+// 數字、程式碼：同上，不預先載入
 export const robotoMono = Roboto_Mono({
   subsets: ["latin"],
+  preload: false,
   display: "swap",
   variable: "--font-roboto-mono",
 });

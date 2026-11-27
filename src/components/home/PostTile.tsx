@@ -18,7 +18,7 @@ export function PostTile({ post }: { post: Post }) {
         />
       ) : (
         <div className="flex aspect-[3/2] items-center justify-center bg-paper-deep">
-          <Image src={categoryIcon(post.category)} alt="" width={320} height={320} className="h-3/4 w-auto" />
+          <Image src={categoryIcon(post.category)} alt="" width={320} height={320} sizes="160px" className="h-3/4 w-auto" />
         </div>
       )}
       <div className="flex flex-1 flex-col p-5">

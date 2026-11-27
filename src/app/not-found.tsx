@@ -12,6 +12,7 @@ export default function NotFound() {
         alt="波波戴著報童帽站在岔路口，攤開地圖一臉困惑，頭上冒出問號"
         width={960}
         height={720}
+        sizes="(min-width: 480px) 448px, 100vw"
         className="h-auto w-full max-w-md rounded-2xl border border-ink/10 shadow-sm"
       />
       <p className="mt-8 font-mono text-sm tracking-widest text-ink-muted">404 NOT FOUND</p>

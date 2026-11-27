@@ -11,6 +11,7 @@ function Logo() {
         width={192}
         height={134}
         priority
+        sizes="72px"
         className="h-10 w-auto md:h-12"
       />
       <span className="flex flex-col leading-tight">
