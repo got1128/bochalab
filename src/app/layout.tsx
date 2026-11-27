@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GoogleTagManagerNoScript, GoogleTagManagerScript } from "@/components/GoogleTagManager";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { defaultOgImage, siteTitle } from "@/lib/seo";
@@ -28,6 +29,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="zh-Hant-TW" className={`${fontVariables} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        <GoogleTagManagerNoScript />
+        <GoogleTagManagerScript />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-brand focus:px-4 focus:py-2 focus:text-paper"
