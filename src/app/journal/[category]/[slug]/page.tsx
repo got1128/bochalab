@@ -94,10 +94,11 @@ export default async function PostPage({ params }: PageProps<"/journal/[category
         <Image
           src={post.cover}
           alt={post.coverAlt ?? ""}
-          width={1600}
-          height={900}
+          // 封面統一 3:2（建議 1200×800），比例不同時會自動裁切
+          width={1200}
+          height={800}
           priority
-          className="mt-8 h-auto w-full max-w-[40em] rounded-xl border border-ink/10 text-[1.0625rem]"
+          className="mt-8 aspect-[3/2] w-full rounded-xl border border-ink/10 object-cover"
         />
       )}
 

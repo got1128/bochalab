@@ -21,7 +21,7 @@ category: "digital"
 date: "2026-12-05"
 updated: "2026-12-10"          # 選填：有修改再寫
 tags: ["標籤一", "標籤二"]
-cover: "/images/journal/xxx.webp"   # 選填：封面圖
+cover: "/images/journal/xxx.webp"   # 選填：封面圖，比例 3:2，建議 1200×800 的 WebP
 coverAlt: "封面圖的文字描述"         # 有 cover 時必填
 draft: true                    # true＝草稿，只在 npm run dev 看得到；要發布改成 false
 sources:
