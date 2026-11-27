@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* 波茶本色（CLAUDE.md §5.2）。元件裡請用這些語意化名稱，不要直接寫 HEX。 */
+@theme {
+  --color-paper: #f5efe3;
+  --color-ink: #2b2522;
+  --color-ink-muted: #68625c;
+  --color-brand: #1f5560;
+  --color-caramel: #a8612a;
+  --color-blush: #d98c8a;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
