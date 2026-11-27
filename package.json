@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "next": "16.4.6",
+    "next-mdx-remote-client": "^2.1.12",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "4.3.3",

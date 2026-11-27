@@ -1,0 +1,93 @@
+---
+title: "DNS 是什麼？用手機通訊錄理解網址怎麼找到網站"
+description: "輸入 bochalab.com 之後，電腦怎麼知道要連到哪一台伺服器？鼠鼠用手機通訊錄的比喻，帶你三分鐘看懂 DNS 怎麼把網址變成 IP 位址。"
+category: "digital"
+date: "2026-12-05"
+tags: ["網站", "DNS", "網路基礎"]
+draft: true
+sources:
+  - title: "What is DNS? | How DNS works（Cloudflare Learning Center）"
+    url: "https://www.cloudflare.com/learning/dns/what-is-dns/"
+  - title: "DNS - MDN Web Docs Glossary"
+    url: "https://developer.mozilla.org/en-US/docs/Glossary/DNS"
+  - title: "Root Servers（IANA）"
+    url: "https://www.iana.org/domains/root/servers"
+  - title: "RFC 1034: Domain Names - Concepts and Facilities"
+    url: "https://www.rfc-editor.org/rfc/rfc1034"
+---
+
+<Callout type="warning" title="給創作者：這是排版測試用的範例草稿">
+這篇是 Claude 寫的範例，用來測試文章頁的排版（標題、清單、表格、引用、程式碼、提示框）。標示「待查證」的地方請再確認。正式發布前請換成你自己的定稿，或確認內容後把 `draft` 改成 `false`。
+</Callout>
+
+Wheek！鼠鼠今天調查了一件每天都在發生、卻很少人注意的事：**我們在瀏覽器輸入網址之後，電腦到底怎麼找到那個網站？**
+
+## 網址是給人看的，IP 位址才是給電腦看的
+
+網路上的每一台伺服器都有一個 **IP 位址**，像是 `185.199.108.153` 這樣一串數字。電腦之間連線，靠的就是這串數字。
+
+可是數字很難記。你記得住朋友的名字，卻不一定記得住他的電話號碼。所以我們發明了**網域名稱**（例如 `bochalab.com`），讓人類可以用好記的名字找到網站。
+
+把網域名稱翻譯成 IP 位址的系統，就是 **DNS**（Domain Name System，網域名稱系統）。
+
+> 你可以把 DNS 想成全世界共用的手機通訊錄：你只要點「波波」，手機就會幫你撥出波波的電話號碼。
+
+## DNS 查詢的四個站點
+
+當你第一次在瀏覽器輸入 `bochalab.com`，背後大致會經過這幾站：
+
+1. **遞迴解析器**（Recursive Resolver）：通常由你的網路業者提供，也可以改用公共 DNS。它負責替你跑完整趟查詢。
+2. **根網域名稱伺服器**（Root Nameserver）：它不知道答案，但知道 `.com` 該去問誰。
+3. **頂級網域伺服器**（TLD Nameserver）：負責 `.com`，它會告訴解析器 `bochalab.com` 歸誰管。
+4. **權威名稱伺服器**（Authoritative Nameserver）：真正握有 `bochalab.com` 紀錄的伺服器，回傳最終的 IP 位址。
+
+拿到 IP 之後，瀏覽器才會真正開始連線、下載網頁。
+
+<Callout>
+根網域名稱伺服器在名稱上共有 13 組（從 `a.root-servers.net` 到 `m.root-servers.net`），但實際上每一組背後都有分散在世界各地的許多台機器。實際的機器數量會變動，請以 IANA 的最新資料為準（待查證）。
+</Callout>
+
+### 為什麼通常感覺不到等待？
+
+因為有**快取**（cache）。查過的答案會被瀏覽器、作業系統和解析器暫時記住，記多久由一個叫 **TTL**（Time To Live）的數字決定。在 TTL 到期之前，再次造訪同一個網站就不用重新跑完整趟流程。
+
+## 常見的 DNS 紀錄類型
+
+設定網站時最常碰到的是這幾種：
+
+| 類型 | 用途 | 範例 |
+|---|---|---|
+| A | 把網域指向 IPv4 位址 | `bochalab.com` → `185.199.108.153` |
+| AAAA | 把網域指向 IPv6 位址 | 一串較長、用冒號分隔的位址 |
+| CNAME | 讓一個名稱成為另一個名稱的別名 | `www` → `<帳號>.github.io` |
+| MX | 指定收信的郵件伺服器 | 讓 `hello@bochalab.com` 收得到信 |
+| TXT | 放一段文字，常用來驗證網域擁有權 | SPF、網域驗證碼 |
+
+<Callout type="discovery">
+鼠鼠特派員的網站 bochalab.com 就是這樣設定的：根網域用 4 筆 A 紀錄指向 GitHub Pages，`www` 用 CNAME 指過去，收信則交給 MX 紀錄。
+</Callout>
+
+## 自己動手查查看
+
+想看看一個網址對應到哪個 IP，可以打開終端機（Windows 叫「命令提示字元」或 PowerShell）輸入：
+
+```bash
+nslookup bochalab.com
+```
+
+macOS 和 Linux 也可以用 `dig`：
+
+```bash
+dig bochalab.com +short
+```
+
+---
+
+## 鼠鼠的調查小結
+
+- DNS 把好記的網域名稱翻譯成電腦看得懂的 IP 位址
+- 一次完整的查詢會經過解析器、根伺服器、頂級網域伺服器、權威伺服器
+- 快取和 TTL 讓查詢大多數時候快到感覺不到
+- 架網站時最常設定的是 A、CNAME、MX、TXT 紀錄
+
+下一篇，鼠鼠想調查網址前面那個小鎖頭：HTTPS 到底是什麼？更多網站製作的知識，可以到[鼠鼠數位研究所](/journal/digital/)看看。

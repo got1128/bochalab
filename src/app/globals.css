@@ -59,4 +59,152 @@
   .rule-double {
     border-bottom: 3px double var(--color-ink);
   }
+
+  /* ---------- 文章內文排版（CLAUDE.md §5.5） ---------- */
+  /* 17px 字、行高 1.85，每行最多約 40 個中文字 */
+  .prose-bocha {
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    max-width: 40em;
+    color: var(--color-ink);
+    overflow-wrap: break-word;
+  }
+  .prose-bocha > * + * {
+    margin-top: 1.25em;
+  }
+  .prose-bocha h2 {
+    margin-top: 2.6em;
+    padding-bottom: 0.35em;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 18%, transparent);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+  }
+  .prose-bocha h2::before {
+    content: "§ ";
+    color: var(--color-caramel);
+    font-family: var(--font-serif);
+  }
+  .prose-bocha h3 {
+    margin-top: 2em;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .prose-bocha h4 {
+    margin-top: 1.75em;
+    font-weight: 700;
+  }
+  .prose-bocha h2 + *,
+  .prose-bocha h3 + *,
+  .prose-bocha h4 + * {
+    margin-top: 0.75em;
+  }
+  .prose-bocha a {
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+  .prose-bocha a:hover {
+    text-decoration-thickness: 2px;
+  }
+  .prose-bocha strong {
+    font-weight: 700;
+    background: linear-gradient(transparent 62%, color-mix(in srgb, var(--color-blush) 40%, transparent) 62%);
+  }
+  .prose-bocha ul,
+  .prose-bocha ol {
+    padding-left: 1.5em;
+  }
+  .prose-bocha ul {
+    list-style: disc;
+  }
+  .prose-bocha ol {
+    list-style: decimal;
+  }
+  .prose-bocha li + li {
+    margin-top: 0.4em;
+  }
+  .prose-bocha li::marker {
+    color: var(--color-ink-muted);
+  }
+  .prose-bocha blockquote {
+    border-left: 3px solid var(--color-caramel);
+    padding: 0.25em 0 0.25em 1.25em;
+    color: var(--color-ink-muted);
+  }
+  .prose-bocha hr {
+    margin-block: 3em;
+    border: 0;
+    text-align: center;
+  }
+  .prose-bocha hr::after {
+    content: "✦ ✦ ✦";
+    color: var(--color-ink-muted);
+    letter-spacing: 1em;
+  }
+  .prose-bocha img {
+    border-radius: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+  }
+  /* 行內程式碼 */
+  .prose-bocha :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    padding: 0.15em 0.4em;
+    border-radius: 0.3em;
+    background: var(--color-paper-deep);
+  }
+  /* 程式碼區塊 */
+  .prose-bocha pre {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    padding: 1.1em 1.25em;
+    border-radius: 0.6rem;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    overflow-x: auto;
+  }
+  /* 表格 */
+  .prose-bocha .table-wrap {
+    overflow-x: auto;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 15%, transparent);
+    border-radius: 0.6rem;
+  }
+  .prose-bocha table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+  .prose-bocha th,
+  .prose-bocha td {
+    padding: 0.65em 1em;
+    text-align: left;
+    vertical-align: top;
+  }
+  .prose-bocha thead th {
+    background: var(--color-paper-deep);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .prose-bocha tbody tr + tr td {
+    border-top: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+  }
+  /* callout 內部的段落間距 */
+  .prose-bocha .callout-body > * + * {
+    margin-top: 0.75em;
+  }
+  .prose-bocha .callout-body {
+    line-height: 1.8;
+  }
+  /* 註腳（remark-gfm 產生） */
+  .prose-bocha .footnotes {
+    margin-top: 3em;
+    font-size: 0.9375rem;
+    color: var(--color-ink-muted);
+  }
 }
