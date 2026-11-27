@@ -13,6 +13,22 @@ export function SiteFooter() {
           <p className="mt-1 tracking-[0.3em] text-paper/80">{site.nameZh}</p>
           <p className="mt-5 leading-relaxed">{site.tagline}</p>
           <p className="font-script text-xl text-paper/80">{site.taglineEn}</p>
+          <ul className="mt-6 flex flex-wrap gap-3" aria-label="社群帳號">
+            {site.social.map((s) => (
+              <li key={s.name}>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block rounded-full border border-paper/40 px-4 py-1.5 text-sm transition-colors hover:bg-paper hover:text-ink"
+                >
+                  {s.name}
+                  <span className="ml-1.5 font-mono text-paper/80">{s.handle}</span>
+                  <span className="sr-only">（另開新視窗）</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <nav aria-label="專欄">

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { EmptyState } from "@/components/EmptyState";
@@ -6,7 +7,14 @@ import { SectionHeader } from "@/components/home/SectionHeader";
 import { books } from "@/data/bookshelf";
 import { categories, categoryIcon } from "@/lib/categories";
 import { getAllPosts, getPostsByCategory } from "@/lib/posts";
+import { homeJsonLd, jsonLdHtml, pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
+
+export const metadata: Metadata = pageMetadata({
+  description:
+    "鼠鼠特派員波波與茶茶，用插畫、知識圖卡和文章，分享日常生活中值得探索的知識：數位、文學、冷知識、生活觀察與大人必修課。",
+  path: "/",
+});
 
 // 首頁六大區塊（CLAUDE.md §3.2）：
 // 1 Hero／2 最新調查報告／3 六大專欄／4 閱讀書架／5 成長日記／6 鼠鼠通信
@@ -237,6 +245,7 @@ function Newsletter() {
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(homeJsonLd())} />
       <Hero />
       <LatestPosts />
       <Columns />

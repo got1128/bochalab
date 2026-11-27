@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { categories } from "@/lib/categories";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "關於鼠鼠特派員",
   description:
     "BOCHA Lab 鼠鼠特派員是以兩隻天竺鼠波波與茶茶為主角的知識內容品牌，用插畫、知識圖卡和文章，分享日常生活中值得探索的知識。",
-};
+  path: "/about/",
+});
 
 // 兩位特派員的介紹。
 // 【待補】個性、喜歡的食物、口頭禪等，請創作者補上真實的內容（不要用猜的）。
@@ -20,7 +22,7 @@ const reporters = [
     avatarAlt: "波波的頭像：戴著報童帽，黑白毛色，臉頰有一塊焦糖色",
     looks: "黑色的毛比較多，臉頰有一塊焦糖色，鼻樑上有一條白色的線。",
     // 【待補】例如：「最喜歡拿著放大鏡到處調查」
-    traits: [] as string[],
+    traits: ["是一隻大隻鼠","對吃的很主動","帥氣的乖乖鼠"] as string[],
   },
   {
     name: "茶茶",
@@ -29,7 +31,7 @@ const reporters = [
     avatarAlt: "茶茶的頭像：戴著報童帽，白色的毛比較多，一側眼睛周圍是深咖啡色",
     looks: "白色的毛比較多，身上帶著橘咖啡色和黑色的花紋。",
     // 【待補】
-    traits: [] as string[],
+    traits: ["是一隻英俊鼠","瀏海看起來很有戲","優雅的內向鼠"] as string[],
   },
 ];
 

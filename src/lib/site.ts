@@ -6,6 +6,11 @@ export const site = {
   taglineEn: "Curious about the world, one little discovery at a time.",
   url: "https://bochalab.com",
   email: "hello@bochalab.com",
+  // 社群帳號（網址一律小寫）
+  social: [
+    { name: "Instagram", handle: "@bocha222", url: "https://www.instagram.com/bocha222/" },
+    { name: "Threads", handle: "@bocha222", url: "https://www.threads.com/@bocha222" },
+  ],
 } as const;
 
 // Header 主選單

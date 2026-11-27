@@ -3,11 +3,13 @@ import { CategoryNav } from "@/components/CategoryNav";
 import { EmptyState } from "@/components/EmptyState";
 import { PostCard } from "@/components/PostCard";
 import { getAllPosts } from "@/lib/posts";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "調查報告",
   description: "鼠鼠特派員的所有調查報告：數位、文學、冷知識、成長日記、生活觀察與大人知識。",
-};
+  path: "/journal/",
+});
 
 export default function JournalPage() {
   const posts = getAllPosts();

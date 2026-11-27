@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { defaultOgImage, siteTitle } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { fontVariables } from "./fonts";
 import "./globals.css";
@@ -13,6 +14,14 @@ export const metadata: Metadata = {
   },
   description:
     "鼠鼠特派員波波與茶茶，用插畫、知識圖卡和文章，分享日常生活中值得探索的知識。",
+  openGraph: {
+    siteName: `${site.name} ${site.nameZh}`,
+    locale: "zh_TW",
+    type: "website",
+    title: siteTitle,
+    images: [defaultOgImage],
+  },
+  twitter: { card: "summary_large_image", images: [defaultOgImage.url] },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

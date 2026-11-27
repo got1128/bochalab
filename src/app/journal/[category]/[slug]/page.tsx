@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import { mdxComponents } from "@/components/mdx/components";
 import { PostCard } from "@/components/PostCard";
 import { formatDate, getAllPosts, getPost, getRelatedPosts } from "@/lib/posts";
+import { articleJsonLd, jsonLdHtml, pageMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -23,7 +24,18 @@ export async function generateMetadata({ params }: PageProps<"/journal/[category
   const { category, slug } = await params;
   const post = getPost(category, slug);
   if (!post) return {};
-  return { title: post.title, description: post.description };
+  return pageMetadata({
+    title: post.title,
+    description: post.description,
+    path: post.url,
+    image: post.cover ? { url: post.cover, width: 1200, height: 800, alt: post.coverAlt ?? post.title } : undefined,
+    article: {
+      publishedTime: post.date,
+      modifiedTime: post.updated,
+      section: post.categoryInfo.name,
+      tags: post.tags,
+    },
+  });
 }
 
 export default async function PostPage({ params }: PageProps<"/journal/[category]/[slug]">) {
@@ -36,6 +48,7 @@ export default async function PostPage({ params }: PageProps<"/journal/[category
 
   return (
     <article className="container-page py-10 md:py-16">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdHtml(articleJsonLd(post))} />
       <div className="mx-auto max-w-[42.5rem]">
       {/* 麵包屑 */}
       <nav aria-label="麵包屑" className="text-sm text-ink-muted">

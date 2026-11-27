@@ -5,6 +5,7 @@ import { CategoryNav } from "@/components/CategoryNav";
 import { EmptyState } from "@/components/EmptyState";
 import { PostCard } from "@/components/PostCard";
 import { categories, categoryIcon, getCategory } from "@/lib/categories";
+import { pageMetadata } from "@/lib/seo";
 import { getPostsByCategory } from "@/lib/posts";
 
 export const dynamicParams = false;
@@ -17,7 +18,11 @@ export async function generateMetadata({ params }: PageProps<"/journal/[category
   const { category } = await params;
   const c = getCategory(category);
   if (!c) return {};
-  return { title: c.name, description: `${c.name}（${c.nameEn}）：${c.description}。` };
+  return pageMetadata({
+    title: c.name,
+    description: `${c.name}（${c.nameEn}）：${c.description}。`,
+    path: `/journal/${c.slug}/`,
+  });
 }
 
 export default async function CategoryPage({ params }: PageProps<"/journal/[category]">) {

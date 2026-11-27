@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { pageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "聯絡鼠鼠特派員",
-  description: `合作邀約、內容勘誤或想跟鼠鼠說說話，都歡迎寫信到 ${site.email}。`,
-};
+  description: `合作邀約、內容勘誤或想跟鼠鼠說說話，都歡迎寫信到 ${site.email}，也可以在 Instagram 和 Threads 找到我們。`,
+  path: "/contact/",
+});
 
 // 聯絡頁：直接用 mailto，不做表單（CLAUDE.md §3.1）
 
@@ -41,6 +43,22 @@ export default function ContactPage() {
           <p className="mt-4 text-ink-muted">
             或直接寄到 <span className="select-all font-mono text-ink">{site.email}</span>
           </p>
+          <p className="mt-6 text-ink-muted">也可以在社群找到鼠鼠：</p>
+          <ul className="mt-2 flex flex-wrap gap-3">
+            {site.social.map((s) => (
+              <li key={s.name}>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block rounded-full border-2 border-brand px-4 py-1.5 font-bold text-brand transition-colors hover:bg-brand hover:text-paper"
+                >
+                  {s.name} <span className="font-mono font-normal">{s.handle}</span>
+                  <span className="sr-only">（另開新視窗）</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <Image
