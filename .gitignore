@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 原始插畫（只留在本機，網站用的 WebP 在 public/images/）
+/image/
